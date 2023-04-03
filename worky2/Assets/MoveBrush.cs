@@ -12,6 +12,7 @@ public class MoveBrush : MonoBehaviour
     public GameObject[] sprites;
     public GameObject current;
     public SpriteManager spriteMan;
+    private int placed = 1;
 
 
     // Start is called before the first frame update
@@ -21,21 +22,26 @@ public class MoveBrush : MonoBehaviour
         gameObject.transform.localScale = new Vector3(1, 1, 1);
         current = Instantiate(sprites[Random.Range(0, sprites.Length)]);
         current.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        spriteMan.spigs.Add(current);
+        spriteMan.spigs.Add(current.GetComponent<SpriteRenderer>());
+        current.GetComponent<SpriteRenderer>().sortingOrder = placed;
+        spriteMan.cur = current.GetComponent<SpriteRenderer>();
     }
 
     void selectcurrent()
     {
+        placed += 1;
         current = Instantiate(sprites[Random.Range(0, sprites.Length)]);
         current.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        spriteMan.spigs.Add(current);
+        spriteMan.spigs.Add(current.GetComponent<SpriteRenderer>());
+        spriteMan.cur = current.GetComponent<SpriteRenderer>();
+        spriteMan.spiglayer = placed;
+        current.GetComponent<SpriteRenderer>().sortingOrder = placed;
         follow = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (follow)
         {
             mousePosition = Input.mousePosition;
@@ -63,7 +69,6 @@ public class MoveBrush : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             follow = false;
-            Instantiate(current);
             selectcurrent();
         }       
     }
