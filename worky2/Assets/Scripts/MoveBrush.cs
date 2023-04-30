@@ -9,19 +9,26 @@ public class MoveBrush : MonoBehaviour
     private Vector3 mousePosition;
     public float moveSpeed = 0.1f;
     public bool follow;
+    public GameObject[] monstersprites;
+    public GameObject[] surrealsprites;
+    public GameObject[] abstractsprites;
     public GameObject[] sprites;
     public GameObject current;
     public SpriteManager spriteMan;
     private int placed = 1;
+    public bool isAbstract = false;
 
 
     // Start is called before the first frame update
-    void Start()
+    public void Begin()
     {
         follow = true;
         gameObject.transform.localScale = new Vector3(1, 1, 1);
         current = Instantiate(sprites[Random.Range(0, sprites.Length)]);
-        current.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        if (isAbstract)
+        {
+            current.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        }
         spriteMan.spigs.Add(current.GetComponent<SpriteRenderer>());
         current.GetComponent<SpriteRenderer>().sortingOrder = placed;
         spriteMan.cur = current.GetComponent<SpriteRenderer>();
@@ -66,7 +73,7 @@ public class MoveBrush : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && follow)
         {
             follow = false;
             selectcurrent();
