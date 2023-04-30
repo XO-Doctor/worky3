@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Donotdestroy : MonoBehaviour
 {
-    private void Awake()
+    void Awake()
     {
         List<GameObject> musicObj = new List<GameObject>();
         musicObj.AddRange(GameObject.FindGameObjectsWithTag("GameMusic"));
