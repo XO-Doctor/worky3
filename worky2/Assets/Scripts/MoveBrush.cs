@@ -38,7 +38,10 @@ public class MoveBrush : MonoBehaviour
     {
         placed += 1;
         current = Instantiate(sprites[Random.Range(0, sprites.Length)]);
-        current.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        if (isAbstract)
+        {
+            current.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        }
         spriteMan.spigs.Add(current.GetComponent<SpriteRenderer>());
         spriteMan.cur = current.GetComponent<SpriteRenderer>();
         spriteMan.spiglayer = placed;

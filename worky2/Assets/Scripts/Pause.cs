@@ -8,6 +8,7 @@ public class Pause : MonoBehaviour
     public GameObject PauseMenu;
     public GameObject spriteManager;
     public static bool isPaused;
+    public bool started = false;
 
     void Start()
     {
@@ -18,15 +19,18 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (started)
         {
-            if (isPaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
+                if (isPaused)
+                {
+                    ResumeGame();
+                }
+                else
+                {
+                    PauseGame();
+                }
             }
         }
     }

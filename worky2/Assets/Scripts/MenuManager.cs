@@ -5,6 +5,7 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     public GameObject self;
+    public Pause pause;
     public MoveBrush brush;
     public UItimer timer;
     public void Monster()
@@ -31,5 +32,6 @@ public class MenuManager : MonoBehaviour
         self.SetActive(false);
         brush.Begin();
         timer.TimerOn = true;
+        pause.started = true;
     }
 }
